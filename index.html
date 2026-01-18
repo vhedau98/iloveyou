@@ -97,13 +97,19 @@ h1 {
 .letter-paper {
   background: #fffaf3;
   border-radius: 16px;
-  padding: 30px 24px 34px;
+  padding: 56px 24px; /* space reserved for stickers */
   box-shadow:
     0 8px 30px rgba(0,0,0,0.12),
     inset 0 0 0 1px rgba(0,0,0,0.04);
   position: relative;
   text-align: left;
-  overflow: hidden; /* IMPORTANT */
+  overflow: hidden;
+}
+
+/* CONTENT LAYER */
+.letter-content {
+  position: relative;
+  z-index: 2;
 }
 
 /* PHOTO */
@@ -127,12 +133,13 @@ h1 {
   color: #444;
 }
 
-/* ================= STICKERS (SAFE POSITIONS) ================= */
+/* ================= STICKERS ================= */
 .sticker {
   position: absolute;
   width: 70px;
   pointer-events: none;
   z-index: 1;
+  opacity: 0.9;
 }
 
 .sticker.top-left {
@@ -226,10 +233,12 @@ const letters = [
   <img src="heart3.jpg" class="sticker top-right">
   <img src="flower1.jpg" class="sticker bottom-left">
 
-  <img src="img1.jpg" class="hero">
-  <div class="title">For when you need a hug</div>
-  <div class="text">
-    I wish I could wrap you in my arms right now bubu. Until then, let this remind you that you’re never alone.
+  <div class="letter-content">
+    <img src="img1.jpg" class="hero">
+    <div class="title">For when you need a hug</div>
+    <div class="text">
+      I wish I could wrap you in my arms right now bubu. Until then, let this remind you that you’re never alone.
+    </div>
   </div>
 </div>
 `,
@@ -239,10 +248,12 @@ const letters = [
   <img src="mine.jpg" class="sticker top-right">
   <img src="flower2.jpg" class="sticker bottom-left">
 
-  <img src="img2.jpg" class="hero">
-  <div class="title">For your smile</div>
-  <div class="text">
-    That smile of yours pillaaa is my favourite thing. I hope this makes you smile again.
+  <div class="letter-content">
+    <img src="img2.jpg" class="hero">
+    <div class="title">For your smile</div>
+    <div class="text">
+      That smile of yours pillaaa is my favourite thing. I hope this makes you smile again.
+    </div>
   </div>
 </div>
 `,
@@ -252,10 +263,12 @@ const letters = [
   <img src="heart2.jpg" class="sticker top-left">
   <img src="heart.jpg" class="sticker bottom-right">
 
-  <img src="img3.jpg" class="hero">
-  <div class="title">For the days you shine</div>
-  <div class="text">
-Some days, you glow without even trying. Your energy, your laugh, your presence, this is a reminder of how bright you are rockstar.
+  <div class="letter-content">
+    <img src="img3.jpg" class="hero">
+    <div class="title">For the days you shine</div>
+    <div class="text">
+      Some days, you glow without even trying. Your energy, your laugh, your presence, this is a reminder of how bright you are rockstar.
+    </div>
   </div>
 </div>
 `,
@@ -265,15 +278,17 @@ Some days, you glow without even trying. Your energy, your laugh, your presence,
   <img src="happy.jpg" class="sticker top-left">
   <img src="snoopy.jpg" class="sticker bottom-right">
 
-  <img src="img4.jpg" class="hero">
-  <div class="title">For Always</div>
-  <div class="text">
-    I love you baccha,
-    in the ordinary moments,
-    in the chaos,
-    in the calm,
-    and in every version of us.
-    Always.
+  <div class="letter-content">
+    <img src="img4.jpg" class="hero">
+    <div class="title">For Always</div>
+    <div class="text">
+      I love you baccha,
+      in the ordinary moments,
+      in the chaos,
+      in the calm,
+      and in every version of us.
+      Always.
+    </div>
   </div>
 </div>
 `
