@@ -8,7 +8,7 @@
   body {
     margin: 0;
     min-height: 100vh;
-    background: #111;
+    background: #0e0e0e;
     font-family: 'Georgia', serif;
     display: flex;
     justify-content: center;
@@ -17,7 +17,7 @@
   }
 
   .wrapper {
-    max-width: 420px;
+    max-width: 440px;
     width: 100%;
     padding: 20px;
     text-align: center;
@@ -25,11 +25,11 @@
 
   h1 {
     font-weight: normal;
-    margin-bottom: 25px;
     letter-spacing: 1px;
+    margin-bottom: 25px;
   }
 
-  /* ENVELOPES GRID */
+  /* ENVELOPES */
   .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -37,39 +37,31 @@
   }
 
   .envelope {
-    position: relative;
     height: 120px;
     background: #b11226;
     border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    position: relative;
     overflow: hidden;
-    transition: transform 0.3s;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.6);
   }
 
-  .envelope:hover {
-    transform: translateY(-4px);
-  }
-
-  /* flap */
   .envelope::before {
     content: "";
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
     height: 60%;
     background: #d62839;
     clip-path: polygon(0 0, 50% 55%, 100% 0);
-    transition: transform 0.6s ease;
     transform-origin: top;
+    transition: transform 0.6s ease;
   }
 
   .envelope.open::before {
     transform: rotateX(180deg);
   }
 
-  /* label */
   .label {
     position: absolute;
     bottom: 8px;
@@ -84,31 +76,94 @@
     animation: fadeIn 0.6s ease;
   }
 
-  .letter-view img {
-    width: 90%;
-    border-radius: 6px;
-    margin-bottom: 15px;
-  }
-
-  .letter-view p {
-    font-size: 15px;
-    line-height: 1.6;
-    opacity: 0.95;
-  }
-
+  /* COMMON BACK */
   .back {
-    margin-top: 20px;
+    margin-top: 18px;
     background: none;
     border: 1px solid #fff;
     color: #fff;
-    padding: 8px 18px;
+    padding: 6px 18px;
     border-radius: 20px;
     cursor: pointer;
   }
 
+  /* 1️⃣ POSTCARD */
+  .postcard {
+    background: linear-gradient(135deg, #b11226, #d62839);
+    padding: 22px;
+    border-radius: 16px;
+  }
+
+  .postcard-inner {
+    background: #f7efe6;
+    color: #333;
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  /* 2️⃣ PAPER LETTER */
+  .paper {
+    background: #fdf6ee;
+    color: #333;
+    padding: 22px;
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 1px #e0d6c8;
+    font-style: italic;
+  }
+
+  /* 3️⃣ STAMP COLLAGE */
+  .stamp {
+    background: #c9184a;
+    padding: 22px;
+    border-radius: 16px;
+  }
+
+  .stamp-inner {
+    background: #fff;
+    color: #333;
+    padding: 16px;
+    border: 3px dashed #c9184a;
+  }
+
+  /* 4️⃣ FINAL LOVE */
+  .love {
+    background: linear-gradient(135deg, #ff4d6d, #c9184a);
+    padding: 40px 20px;
+    border-radius: 20px;
+  }
+
+  .heart {
+    font-size: 48px;
+    animation: beat 1.2s infinite;
+  }
+
+  /* COMMON IMAGE */
+  .photo {
+    width: 140px;
+    margin: 0 auto 12px;
+    border: 2px solid #ddd;
+    padding: 6px;
+    background: #fff;
+  }
+
+  .photo img {
+    width: 100%;
+    display: block;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes beat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
   }
 </style>
 </head>
@@ -120,20 +175,16 @@
   <!-- HOME -->
   <div id="home">
     <h1>Letters For You</h1>
-
     <div class="grid">
       <div class="envelope" onclick="openLetter(0, this)">
         <div class="label">Open when you need a hug</div>
       </div>
-
       <div class="envelope" onclick="openLetter(1, this)">
         <div class="label">Open when you miss me</div>
       </div>
-
       <div class="envelope" onclick="openLetter(2, this)">
         <div class="label">Open when you’re tired</div>
       </div>
-
       <div class="envelope" onclick="openLetter(3, this)">
         <div class="label">Open when you smile</div>
       </div>
@@ -141,52 +192,71 @@
   </div>
 
   <!-- LETTER -->
-  <div id="letter" class="letter-view">
-    <img id="letterImg" src="">
-    <p id="letterText"></p>
-    <button class="back" onclick="goBack()">Back</button>
-  </div>
+  <div id="letter" class="letter-view"></div>
+  <button id="backBtn" class="back" onclick="goBack()" style="display:none">Back</button>
 
 </div>
 
 <script>
   const letters = [
-    {
-      img: "img1.jpg",
-      text: "I wish I could wrap you in my arms right now. Until then, let this remind you that you’re never alone."
-    },
-    {
-      img: "img2.jpg",
-      text: "Missing me just means we’ve created something beautiful. I’m always closer than you think."
-    },
-    {
-      img: "img3.jpg",
-      text: "Rest for a moment. You’re doing better than you realise, and I’m so proud of you."
-    },
-    {
-      img: "img4.jpg",
-      text: "That smile of yours? It’s my favourite thing in the world."
-    }
+    `
+    <div class="postcard">
+      <div class="postcard-inner">
+        <div class="photo"><img src="img1.jpg"></div>
+        <div class="text">
+          I wish I could wrap you in my arms right now.<br>
+          Until then, let this be a little hug from me.
+        </div>
+      </div>
+    </div>
+    `,
+    `
+    <div class="paper">
+      <div class="photo"><img src="img2.jpg"></div>
+      <div class="text">
+        This is a quiet letter.<br>
+        Just to remind you that you’re deeply loved,
+        even on days you doubt it.
+      </div>
+    </div>
+    `,
+    `
+    <div class="stamp">
+      <div class="stamp-inner">
+        <div class="photo"><img src="img3.jpg"></div>
+        <div class="text">
+          Think of this like a memory sent from my heart.<br>
+          Stamped, sealed, always yours.
+        </div>
+      </div>
+    </div>
+    `,
+    `
+    <div class="love">
+      <div class="heart">🤍</div>
+      <div class="text" style="font-size:18px;margin-top:10px">
+        I love you.<br>
+        Always.
+      </div>
+    </div>
+    `
   ];
 
   function openLetter(i, el) {
     el.classList.add("open");
-
     setTimeout(() => {
       document.getElementById("home").style.display = "none";
+      document.getElementById("letter").innerHTML = letters[i];
       document.getElementById("letter").style.display = "block";
-      document.getElementById("letterImg").src = letters[i].img;
-      document.getElementById("letterText").innerText = letters[i].text;
+      document.getElementById("backBtn").style.display = "inline-block";
     }, 600);
   }
 
   function goBack() {
     document.getElementById("letter").style.display = "none";
     document.getElementById("home").style.display = "block";
-
-    document.querySelectorAll(".envelope").forEach(e => {
-      e.classList.remove("open");
-    });
+    document.getElementById("backBtn").style.display = "none";
+    document.querySelectorAll(".envelope").forEach(e => e.classList.remove("open"));
   }
 </script>
 
