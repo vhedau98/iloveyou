@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Letters For You 🤍</title>
 
-<!-- FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
@@ -17,17 +16,37 @@ body {
   justify-content: center;
   align-items: center;
   color: #fff;
+
+  /* STICKER PATTERN BACKGROUND */
   background-color: #0e0e0e;
+  background-image:
+    url("heart3.jpg"),
+    url("flower1.jpg"),
+    url("heart2.jpg"),
+    url("mine.jpg"),
+    url("flower2.jpg"),
+    url("snoopy.jpg"),
+    url("heart.jpg"),
+    url("happy.jpg");
+  background-size:
+    90px, 80px, 70px, 75px,
+    85px, 90px, 70px, 80px;
+  background-repeat: repeat;
+  background-position:
+    0 0, 120px 80px, 240px 160px, 360px 40px,
+    80px 260px, 200px 320px, 340px 200px, 420px 360px;
 }
 
+/* dark overlay to soften stickers */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0,0,0,0.72);
   z-index: 0;
 }
 
+/* subtle grain */
 body::after {
   content: "";
   position: fixed;
@@ -66,7 +85,7 @@ h1 {
   border-radius: 20px;
   cursor: pointer;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.65);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
   transition: transform 0.35s ease;
 }
 
@@ -130,7 +149,7 @@ h1 {
   border-radius: 30px;
   padding: 30px;
   position: relative;
-  overflow: visible; /* IMPORTANT */
+  overflow: visible;
 }
 
 .paper {
@@ -164,13 +183,13 @@ h1 {
 /* ================= STICKERS ================= */
 .sticker {
   position: absolute;
-  width: 140px;
+  width: 130px;
   z-index: 5;
   pointer-events: none;
   filter: drop-shadow(0 8px 10px rgba(0,0,0,0.25));
 }
 
-.small { width: 100px; }
+.small { width: 90px; }
 .rotate-left { transform: rotate(-15deg); }
 .rotate-right { transform: rotate(12deg); }
 
@@ -250,6 +269,42 @@ const letters = [
 
   <div class="paper">
     <img src="img2.jpg" class="hero">
+    <div class="title">For when you miss me</div>
+    <div class="text">
+      Missing someone only happens when something real exists.
+      Even when we’re apart, we carry each other in memories,
+      songs, and quiet smiles.
+    </div>
+  </div>
+</div>
+`,
+
+/* LETTER 3 */
+`
+<div class="letter-full">
+  <img src="heart2.jpg" class="sticker small rotate-left" style="top:-25px; left:-25px;">
+  <img src="heart.jpg" class="sticker rotate-right" style="bottom:-30px; right:30px;">
+
+  <div class="paper">
+    <img src="img3.jpg" class="hero">
+    <div class="title">For when you’re tired</div>
+    <div class="text">
+      Pause for a second. Breathe.
+      You’ve been doing more than you realise.
+      It’s okay to rest — I see you, and I’m proud of you.
+    </div>
+  </div>
+</div>
+`,
+
+/* LETTER 4 */
+`
+<div class="letter-full">
+  <img src="happy.jpg" class="sticker rotate-left" style="top:-35px; left:-35px;">
+  <img src="snoopy.jpg" class="sticker small rotate-right" style="bottom:-25px; right:25px;">
+
+  <div class="paper">
+    <img src="img4.jpg" class="hero">
     <div class="title">Just because</div>
     <div class="text">
       I love you — in the ordinary moments,
