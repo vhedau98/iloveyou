@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Letters For You 🤍</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
@@ -15,42 +16,34 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0e0e0e;
-  color: #fff;
+
+  /* PASTEL BACKGROUND */
+  background: radial-gradient(circle at top, #fff1f5, #faf6f1);
+  color: #333;
 }
 
-/* DARK OVERLAY */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.72);
-  z-index: 0;
-}
-
-/* GRAIN */
+/* SUBTLE GRAIN */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
-  z-index: 1;
 }
 
-/* BACKGROUND STICKERS */
+/* ================= BACKGROUND STICKERS ================= */
 .bg-stickers {
   position: fixed;
   inset: 0;
-  z-index: 0;
   pointer-events: none;
-  opacity: 0.06;
+  z-index: 0;
 }
 
 .bg-stickers img {
   position: absolute;
-  width: 140px;
-  filter: blur(0.4px);
+  width: 120px;
+  opacity: 0.12;
+  filter: blur(0.3px);
 }
 
 /* ================= LAYOUT ================= */
@@ -66,29 +59,29 @@ body::after {
 /* ================= HOME ================= */
 h1 {
   font-family: 'Caveat', cursive;
-  font-size: 44px;
-  margin-bottom: 30px;
+  font-size: 42px;
+  margin-bottom: 28px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 22px;
 }
 
+/* ================= ENVELOPES ================= */
 .envelope {
   position: relative;
-  height: 170px;
-  background: linear-gradient(135deg, #c9184a, #ff758f);
-  border-radius: 20px;
+  height: 150px;
+  background: linear-gradient(135deg, #ffafcc, #ffc8dd);
+  border-radius: 18px;
   cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  transition: transform 0.3s ease;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+  transition: transform 0.25s ease;
 }
 
 .envelope:hover {
-  transform: translateY(-6px) scale(1.02);
+  transform: translateY(-4px) scale(1.02);
 }
 
 .envelope::before {
@@ -96,8 +89,8 @@ h1 {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 60%;
-  background: linear-gradient(135deg, #ff9ab3, #ff4d6d);
+  height: 55%;
+  background: linear-gradient(135deg, #ffd6e8, #ffb3d9);
   clip-path: polygon(0 0, 50% 60%, 100% 0);
 }
 
@@ -106,8 +99,8 @@ h1 {
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   background: #fff;
   border-radius: 50%;
   display: flex;
@@ -120,86 +113,101 @@ h1 {
   bottom: 12px;
   width: 100%;
   font-family: 'Caveat', cursive;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 /* ================= LETTER VIEW ================= */
 .letter-view {
   display: none;
-  animation: reveal 0.8s ease forwards;
+  animation: reveal 0.6s ease forwards;
 }
 
 @keyframes reveal {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ================= LETTER PAGE ================= */
+/* ================= LETTER CARD ================= */
 .letter-full {
-  min-height: 80vh;
-  background: linear-gradient(135deg, #b11226, #d62839);
-  border-radius: 30px;
-  padding: 30px;
+  background: linear-gradient(135deg, #ffcad4, #f4acb7);
+  border-radius: 26px;
+  padding: 22px;
   position: relative;
-  overflow: visible;
 }
 
 .paper {
-  background: #fdf6ee;
-  color: #333;
-  border-radius: 22px;
-  padding: 34px;
+  background: #fffaf3;
+  border-radius: 20px;
+  padding: 26px;
   position: relative;
   z-index: 2;
 }
 
 .hero {
   width: 100%;
-  max-height: 340px;
+  max-height: 260px;
   object-fit: cover;
-  border-radius: 16px;
-  margin-bottom: 22px;
+  border-radius: 14px;
+  margin-bottom: 18px;
 }
 
 .title {
   font-family: 'Caveat', cursive;
-  font-size: 38px;
-  margin-bottom: 14px;
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
 .text {
-  font-size: 19px;
-  line-height: 1.85;
+  font-size: 17px;
+  line-height: 1.7;
 }
 
-/* ================= STICKERS ================= */
+/* ================= STICKERS ON LETTER ================= */
 .sticker {
   position: absolute;
-  width: 130px;
+  width: 100px;
   z-index: 5;
   pointer-events: none;
-  filter: drop-shadow(0 8px 10px rgba(0,0,0,0.25));
 }
 
-.small { width: 90px; }
-.rotate-left { transform: rotate(-15deg); }
+.rotate-left { transform: rotate(-12deg); }
 .rotate-right { transform: rotate(12deg); }
 
-/* ================= BACK ================= */
+/* ================= BACK BUTTON ================= */
 .back {
-  margin-top: 22px;
-  padding: 10px 30px;
-  border-radius: 26px;
-  background: rgba(255,255,255,0.2);
-  border: 1px solid #fff;
-  color: #fff;
+  margin-top: 18px;
+  padding: 8px 26px;
+  border-radius: 22px;
+  border: none;
+  background: #ffc8dd;
+  color: #333;
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
   cursor: pointer;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .bg-stickers img {
+    width: 90px;
+    opacity: 0.08;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
 }
 </style>
 </head>
@@ -208,12 +216,11 @@ h1 {
 
 <!-- BACKGROUND STICKERS -->
 <div class="bg-stickers">
-  <img src="heart3.jpg" style="top:6%; left:8%;">
-  <img src="flower1.jpg" style="top:14%; right:10%;">
-  <img src="snoopy.jpg" style="bottom:12%; left:6%;">
+  <img src="heart3.jpg" style="top:8%; left:6%;">
+  <img src="flower1.jpg" style="top:16%; right:8%;">
+  <img src="snoopy.jpg" style="bottom:12%; left:10%;">
   <img src="mine.jpg" style="bottom:18%; right:12%;">
-  <img src="heart2.jpg" style="top:48%; left:2%;">
-  <img src="happy.jpg" style="top:56%; right:4%;">
+  <img src="heart2.jpg" style="top:55%; left:4%;">
 </div>
 
 <div class="wrapper">
@@ -253,16 +260,16 @@ const letters = [
 
 `
 <div class="letter-full">
-  <img src="heart3.jpg" class="sticker rotate-left" style="top:-40px; left:-40px;">
-  <img src="flower1.jpg" class="sticker small rotate-right" style="bottom:-30px; right:-10px;">
+  <img src="heart3.jpg" class="sticker rotate-left" style="top:-20px; left:-20px;">
+  <img src="flower1.jpg" class="sticker rotate-right" style="bottom:-20px; right:-10px;">
 
   <div class="paper">
     <img src="img1.jpg" class="hero">
     <div class="title">For when you need a hug</div>
     <div class="text">
-      When everything feels heavy, I want you to remember this —
+      When everything feels heavy, remember this —
       you don’t have to carry it alone.
-      If I were there, I’d pull you close and let the world be quiet for a while.
+      I’d pull you close and let the world be quiet for a while.
     </div>
   </div>
 </div>
@@ -270,16 +277,15 @@ const letters = [
 
 `
 <div class="letter-full">
-  <img src="mine.jpg" class="sticker small rotate-left" style="top:-30px; right:40px;">
-  <img src="flower2.jpg" class="sticker rotate-right" style="bottom:-40px; left:-30px;">
+  <img src="mine.jpg" class="sticker rotate-left" style="top:-20px; right:30px;">
+  <img src="flower2.jpg" class="sticker rotate-right" style="bottom:-20px; left:-20px;">
 
   <div class="paper">
     <img src="img2.jpg" class="hero">
     <div class="title">For when you miss me</div>
     <div class="text">
       Missing someone only happens when something real exists.
-      Even when we’re apart, we carry each other in memories,
-      songs, and quiet smiles.
+      Even when we’re apart, we carry each other in memories and smiles.
     </div>
   </div>
 </div>
@@ -287,16 +293,16 @@ const letters = [
 
 `
 <div class="letter-full">
-  <img src="heart2.jpg" class="sticker small rotate-left" style="top:-25px; left:-25px;">
-  <img src="heart.jpg" class="sticker rotate-right" style="bottom:-30px; right:30px;">
+  <img src="heart2.jpg" class="sticker rotate-left" style="top:-18px; left:-18px;">
+  <img src="heart.jpg" class="sticker rotate-right" style="bottom:-18px; right:20px;">
 
   <div class="paper">
     <img src="img3.jpg" class="hero">
     <div class="title">For when you’re tired</div>
     <div class="text">
-      Pause for a second. Breathe.
+      Pause. Breathe.
       You’ve been doing more than you realise.
-      It’s okay to rest — I see you, and I’m proud of you.
+      It’s okay to rest — I see you.
     </div>
   </div>
 </div>
@@ -304,8 +310,8 @@ const letters = [
 
 `
 <div class="letter-full">
-  <img src="happy.jpg" class="sticker rotate-left" style="top:-35px; left:-35px;">
-  <img src="snoopy.jpg" class="sticker small rotate-right" style="bottom:-25px; right:25px;">
+  <img src="happy.jpg" class="sticker rotate-left" style="top:-20px; left:-20px;">
+  <img src="snoopy.jpg" class="sticker rotate-right" style="bottom:-18px; right:20px;">
 
   <div class="paper">
     <img src="img4.jpg" class="hero">
