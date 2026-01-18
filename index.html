@@ -4,209 +4,231 @@
 <meta charset="UTF-8">
 <title>Letters For You 🤍</title>
 
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-  body {
-    margin: 0;
-    min-height: 100vh;
-    background: radial-gradient(circle at top, #2a0a14, #0e0e0e);
-    font-family: 'Georgia', serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-  }
+/* ================= GLOBAL ================= */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Playfair Display', serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
 
-  .wrapper {
-    max-width: 440px;
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-  }
+  /* BACKGROUND STICKER PATTERN */
+  background-color: #0e0e0e;
+  background-image:
+    url("heart3.jpg"),
+    url("flower1.jpg"),
+    url("mine.jpg"),
+    url("heart2.jpg"),
+    url("flower2.jpg"),
+    url("snoopy.jpg");
+  background-size: 160px, 180px, 140px, 150px, 170px, 160px;
+  background-position:
+    5% 10%,
+    95% 15%,
+    10% 85%,
+    90% 80%,
+    50% 5%,
+    50% 95%;
+  background-repeat: no-repeat;
+}
 
-  h1 {
-    font-weight: normal;
-    letter-spacing: 1px;
-    margin-bottom: 25px;
-  }
+/* dark overlay so background doesn’t distract */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 0;
+}
 
-  /* ================= ENVELOPES ================= */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
+/* grain texture */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
 
-  .envelope {
-    position: relative;
-    height: 135px;
-    background: linear-gradient(135deg, #c9184a, #ff758f);
-    border-radius: 16px;
-    cursor: pointer;
-    overflow: hidden;
-    box-shadow: 0 14px 30px rgba(0,0,0,0.6);
-    transition: transform 0.35s ease;
-    animation: float 3s ease-in-out infinite;
-  }
+.wrapper {
+  max-width: 520px;
+  width: 100%;
+  padding: 24px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
 
-  .envelope:hover {
-    transform: translateY(-6px) rotate(-1deg);
-  }
+/* ================= HOME ================= */
+h1 {
+  font-family: 'Caveat', cursive;
+  font-size: 44px;
+  margin-bottom: 30px;
+}
 
-  .envelope::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 62%;
-    background: linear-gradient(135deg, #ff8fa3, #ff4d6d);
-    clip-path: polygon(0 0, 50% 60%, 100% 0);
-    transform-origin: top;
-    transition: transform 0.6s ease;
-  }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
 
-  .envelope.open::before {
-    transform: rotateX(180deg);
-  }
+.envelope {
+  position: relative;
+  height: 170px;
+  background: linear-gradient(135deg, #c9184a, #ff758f);
+  border-radius: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.65);
+  transition: transform 0.35s ease;
+}
 
-  .seal {
-    position: absolute;
-    top: 52%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
-    background: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  }
+.envelope:hover {
+  transform: translateY(-8px) rotate(-1deg);
+}
 
-  .label {
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
-    font-size: 12px;
-    opacity: 0.95;
-  }
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(135deg, #ff9ab3, #ff4d6d);
+  clip-path: polygon(0 0, 50% 60%, 100% 0);
+  transform-origin: top;
+  transition: transform 0.6s ease;
+}
 
-  @keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
-  }
+.envelope.open::before {
+  transform: rotateX(180deg);
+}
 
-  /* ================= LETTER VIEW ================= */
-  .letter-view {
-    display: none;
-    animation: fadeIn 0.6s ease;
-  }
+.seal {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
 
-  .back {
-    margin-top: 18px;
-    background: none;
-    border: 1px solid #fff;
-    color: #fff;
-    padding: 6px 18px;
-    border-radius: 20px;
-    cursor: pointer;
-  }
+.label {
+  position: absolute;
+  bottom: 12px;
+  width: 100%;
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+}
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+/* ================= LETTER VIEW ================= */
+.letter-view {
+  display: none;
+}
 
-  /* ================= STICKERS ================= */
-  .sticker {
-    position: absolute;
-    width: 55px;
-    opacity: 0.9;
-    pointer-events: none;
-  }
+/* PAGE TURN */
+.page {
+  transform-origin: left center;
+  animation: pageIn 0.9s ease forwards;
+}
 
-  .small { width: 40px; }
-  .big { width: 80px; }
-  .rotate-left { transform: rotate(-12deg); }
-  .rotate-right { transform: rotate(12deg); }
-
-  /* ================= POSTCARD ================= */
-  .postcard {
-    background: linear-gradient(135deg, #b11226, #d62839);
-    border-radius: 18px;
-    padding: 22px;
-    position: relative;
+@keyframes pageIn {
+  from {
+    transform: perspective(1400px) rotateY(-90deg);
+    opacity: 0;
   }
-
-  .postcard-inner {
-    background: #f8f2ea;
-    color: #333;
-    padding: 16px;
-    border-radius: 10px;
+  to {
+    transform: perspective(1400px) rotateY(0deg);
+    opacity: 1;
   }
+}
 
-  /* ================= PAPER LETTER ================= */
-  .paper {
-    background: #fdf6ee;
-    color: #333;
-    padding: 22px;
-    border-radius: 8px;
-    font-style: italic;
-    position: relative;
-  }
+.page-out {
+  animation: pageOut 0.6s ease forwards;
+}
 
-  /* ================= STAMP ================= */
-  .stamp {
-    background: #c9184a;
-    padding: 22px;
-    border-radius: 18px;
-    position: relative;
+@keyframes pageOut {
+  from {
+    transform: perspective(1400px) rotateY(0deg);
+    opacity: 1;
   }
+  to {
+    transform: perspective(1400px) rotateY(90deg);
+    opacity: 0;
+  }
+}
 
-  .stamp-inner {
-    background: #fff;
-    color: #333;
-    padding: 16px;
-    border: 3px dashed #c9184a;
-  }
+/* ================= LETTER PAGE ================= */
+.letter-full {
+  min-height: 80vh;
+  background: linear-gradient(135deg, #b11226, #d62839);
+  border-radius: 28px;
+  padding: 30px;
+  position: relative;
+}
 
-  /* ================= LOVE ================= */
-  .love {
-    background: linear-gradient(135deg, #ff4d6d, #c9184a);
-    padding: 40px 20px;
-    border-radius: 22px;
-    position: relative;
-  }
+.paper {
+  background: #fdf6ee;
+  color: #333;
+  border-radius: 22px;
+  padding: 32px;
+  position: relative;
+}
 
-  .heart {
-    font-size: 52px;
-    animation: beat 1.2s infinite;
-  }
+.hero {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 22px;
+}
 
-  @keyframes beat {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-  }
+.title {
+  font-family: 'Caveat', cursive;
+  font-size: 38px;
+  margin-bottom: 14px;
+}
 
-  /* COMMON */
-  .photo {
-    width: 150px;
-    margin: 0 auto 12px;
-    border: 2px solid #ddd;
-    padding: 6px;
-    background: #fff;
-  }
+.text {
+  font-size: 19px;
+  line-height: 1.85;
+}
 
-  .photo img {
-    width: 100%;
-    display: block;
-  }
+/* ================= STICKERS ================= */
+.sticker {
+  position: absolute;
+  width: 120px;
+  pointer-events: none;
+}
 
-  .text {
-    font-size: 14px;
-    line-height: 1.6;
-  }
+.small { width: 90px; }
+.big { width: 150px; }
+
+.rotate-left { transform: rotate(-15deg); }
+.rotate-right { transform: rotate(15deg); }
+
+/* ================= BACK BUTTON ================= */
+.back {
+  margin-top: 22px;
+  padding: 10px 30px;
+  border-radius: 26px;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid #fff;
+  color: #fff;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -221,22 +243,22 @@
     <div class="grid">
       <div class="envelope" onclick="openLetter(0, this)">
         <div class="seal">💗</div>
-        <div class="label">Open when you need a hug</div>
+        <div class="label">When you need a hug</div>
       </div>
 
       <div class="envelope" onclick="openLetter(1, this)">
         <div class="seal">🌸</div>
-        <div class="label">Open when you miss me</div>
+        <div class="label">When you miss me</div>
       </div>
 
       <div class="envelope" onclick="openLetter(2, this)">
         <div class="seal">💌</div>
-        <div class="label">Open when you’re tired</div>
+        <div class="label">When you’re tired</div>
       </div>
 
       <div class="envelope" onclick="openLetter(3, this)">
         <div class="seal">🤍</div>
-        <div class="label">Open when you smile</div>
+        <div class="label">Just because</div>
       </div>
     </div>
   </div>
@@ -248,85 +270,111 @@
 </div>
 
 <script>
-  const letters = [
+const letters = [
 
-  /* POSTCARD */
-  `
-  <div class="postcard">
-    <img src="heart3.jpg" class="sticker rotate-left" style="top:-10px; left:-10px;">
-    <img src="flower1.jpg" class="sticker small rotate-right" style="bottom:-10px; right:10px;">
+/* LETTER 1 */
+`
+<div class="page">
+  <div class="letter-full">
+    <img src="heart3.jpg" class="sticker big rotate-left" style="top:-30px; left:-30px;">
+    <img src="flower1.jpg" class="sticker small rotate-right" style="bottom:-20px; right:-10px;">
 
-    <div class="postcard-inner">
-      <div class="photo"><img src="img1.jpg"></div>
+    <div class="paper">
+      <img src="img1.jpg" class="hero">
+      <div class="title">For when you need a hug</div>
       <div class="text">
-        I wish I could wrap you in my arms right now.<br>
-        Until then, let this be a little hug from me.
+        When everything feels heavy, I want you to remember this —
+        you don’t have to carry it alone.
+        If I were there, I’d pull you close and let the world be quiet for a while.
       </div>
     </div>
   </div>
-  `,
+</div>
+`,
 
-  /* PAPER LETTER */
-  `
-  <div class="paper">
-    <img src="mine.jpg" class="sticker small rotate-left" style="top:-15px; left:30%;">
-    <img src="flower2.jpg" class="sticker rotate-right" style="bottom:-15px; right:10px;">
+/* LETTER 2 */
+`
+<div class="page">
+  <div class="letter-full">
+    <img src="mine.jpg" class="sticker small rotate-left" style="top:-25px; right:40px;">
+    <img src="flower2.jpg" class="sticker rotate-right" style="bottom:-30px; left:-20px;">
 
-    <div class="photo"><img src="img2.jpg"></div>
-    <div class="text">
-      This is a quiet letter.<br>
-      Just to remind you that you’re deeply loved,
-      even on days you forget it.
-    </div>
-  </div>
-  `,
-
-  /* STAMP */
-  `
-  <div class="stamp">
-    <img src="heart2.jpg" class="sticker small" style="top:10px; left:10px;">
-    <img src="heart.jpg" class="sticker rotate-right" style="bottom:-10px; left:40px;">
-
-    <div class="stamp-inner">
-      <div class="photo"><img src="img3.jpg"></div>
+    <div class="paper">
+      <img src="img2.jpg" class="hero">
+      <div class="title">For when you miss me</div>
       <div class="text">
-        Think of this like a memory sent from my heart.<br>
-        Stamped, sealed, always yours.
+        Missing someone only happens when something real exists.
+        Even when we’re apart, we carry each other in memories,
+        songs, and quiet smiles.
       </div>
     </div>
   </div>
-  `,
+</div>
+`,
 
-  /* LOVE */
-  `
-  <div class="love">
-    <img src="happy.jpg" class="sticker big rotate-left" style="top:-20px; left:-20px;">
-    <img src="snoopy.jpg" class="sticker small rotate-right" style="bottom:-10px; right:20px;">
+/* LETTER 3 */
+`
+<div class="page">
+  <div class="letter-full">
+    <img src="heart2.jpg" class="sticker small rotate-left" style="top:-20px; left:-20px;">
+    <img src="heart.jpg" class="sticker rotate-right" style="bottom:-30px; right:30px;">
 
-    <div class="heart">🤍</div>
-    <div class="text" style="font-size:18px;margin-top:10px">
-      I love you.<br>Always.
+    <div class="paper">
+      <img src="img3.jpg" class="hero">
+      <div class="title">For when you’re tired</div>
+      <div class="text">
+        Pause for a second. Breathe.
+        You’ve been doing more than you realise.
+        It’s okay to rest — I see you, and I’m proud of you.
+      </div>
     </div>
   </div>
-  `
-  ];
+</div>
+`,
 
-  function openLetter(i, el) {
-    el.classList.add("open");
-    setTimeout(() => {
-      document.getElementById("home").style.display = "none";
-      document.getElementById("letter").innerHTML = letters[i];
-      document.getElementById("letter").style.display = "block";
-      document.getElementById("backBtn").style.display = "inline-block";
-    }, 600);
-  }
+/* LETTER 4 */
+`
+<div class="page">
+  <div class="letter-full">
+    <img src="happy.jpg" class="sticker big rotate-left" style="top:-30px; left:-30px;">
+    <img src="snoopy.jpg" class="sticker small rotate-right" style="bottom:-20px; right:20px;">
 
-  function goBack() {
+    <div class="paper">
+      <img src="img4.jpg" class="hero">
+      <div class="title">Just because</div>
+      <div class="text">
+        I love you — in the ordinary moments,
+        in the chaos, in the calm,
+        and in every version of us.
+        Always.
+      </div>
+    </div>
+  </div>
+</div>
+`
+];
+
+function openLetter(i, el) {
+  el.classList.add("open");
+  setTimeout(() => {
+    document.getElementById("home").style.display = "none";
+    document.getElementById("letter").innerHTML = letters[i];
+    document.getElementById("letter").style.display = "block";
+    document.getElementById("backBtn").style.display = "inline-block";
+  }, 600);
+}
+
+function goBack() {
+  const page = document.querySelector(".page");
+  page.classList.add("page-out");
+
+  setTimeout(() => {
     document.getElementById("letter").style.display = "none";
     document.getElementById("home").style.display = "block";
     document.getElementById("backBtn").style.display = "none";
     document.querySelectorAll(".envelope").forEach(e => e.classList.remove("open"));
-  }
+  }, 600);
+}
 </script>
 
 </body>
