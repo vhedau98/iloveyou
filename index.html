@@ -96,26 +96,26 @@ h1 {
 /* ================= LETTER PAPER ================= */
 .letter-paper {
   background: #fffaf3;
-  border-radius: 16px;
-  padding: 56px 24px; /* space reserved for stickers */
+  border-radius: 18px;
   box-shadow:
-    0 8px 30px rgba(0,0,0,0.12),
+    0 10px 30px rgba(0,0,0,0.15),
     inset 0 0 0 1px rgba(0,0,0,0.04);
   position: relative;
-  text-align: left;
-  overflow: hidden;
+  margin-bottom: 18px;
 }
 
-/* CONTENT LAYER */
-.letter-content {
+/* INNER SAFE CONTENT */
+.letter-inner {
+  padding: 56px 24px 56px;
   position: relative;
   z-index: 2;
+  text-align: left;
 }
 
 /* PHOTO */
 .hero {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 18px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.15);
 }
@@ -138,34 +138,35 @@ h1 {
   position: absolute;
   width: 70px;
   pointer-events: none;
-  z-index: 1;
-  opacity: 0.9;
+  z-index: 3;
+  opacity: 0.95;
 }
 
+/* intentional scrapbook overlap */
 .sticker.top-left {
-  top: 12px;
-  left: 12px;
+  top: -18px;
+  left: -12px;
 }
 
 .sticker.top-right {
-  top: 12px;
-  right: 12px;
+  top: -18px;
+  right: -12px;
 }
 
 .sticker.bottom-left {
-  bottom: 12px;
-  left: 12px;
+  bottom: -14px;
+  left: -12px;
 }
 
 .sticker.bottom-right {
-  bottom: 12px;
-  right: 12px;
+  bottom: -14px;
+  right: -12px;
 }
 
 /* ================= BACK BUTTON ================= */
 .back {
-  margin-top: 18px;
-  padding: 8px 28px;
+  margin-top: 10px;
+  padding: 10px 30px;
   border-radius: 22px;
   border: none;
   background: linear-gradient(135deg, #ffd6e8, #ffc2d6);
@@ -180,10 +181,6 @@ h1 {
   .title { font-size: 28px; }
   .text { font-size: 16px; }
   .sticker { width: 60px; }
-  body::before {
-    opacity: 0.05;
-    background-size: 380px auto;
-  }
 }
 </style>
 </head>
@@ -233,7 +230,7 @@ const letters = [
   <img src="heart3.jpg" class="sticker top-right">
   <img src="flower1.jpg" class="sticker bottom-left">
 
-  <div class="letter-content">
+  <div class="letter-inner">
     <img src="img1.jpg" class="hero">
     <div class="title">For when you need a hug</div>
     <div class="text">
@@ -248,7 +245,7 @@ const letters = [
   <img src="mine.jpg" class="sticker top-right">
   <img src="flower2.jpg" class="sticker bottom-left">
 
-  <div class="letter-content">
+  <div class="letter-inner">
     <img src="img2.jpg" class="hero">
     <div class="title">For your smile</div>
     <div class="text">
@@ -263,7 +260,7 @@ const letters = [
   <img src="heart2.jpg" class="sticker top-left">
   <img src="heart.jpg" class="sticker bottom-right">
 
-  <div class="letter-content">
+  <div class="letter-inner">
     <img src="img3.jpg" class="hero">
     <div class="title">For the days you shine</div>
     <div class="text">
@@ -278,7 +275,7 @@ const letters = [
   <img src="happy.jpg" class="sticker top-left">
   <img src="snoopy.jpg" class="sticker bottom-right">
 
-  <div class="letter-content">
+  <div class="letter-inner">
     <img src="img4.jpg" class="hero">
     <div class="title">For Always</div>
     <div class="text">
