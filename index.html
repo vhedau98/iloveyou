@@ -2,127 +2,113 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For Us 🤍</title>
+<title>Letters For You 🤍</title>
 
 <style>
   body {
     margin: 0;
     min-height: 100vh;
-    background: linear-gradient(135deg, #f8cdda, #fbd3e9);
-    font-family: 'Segoe UI', sans-serif;
+    background: #111;
+    font-family: 'Georgia', serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
+    color: #fff;
   }
 
   .wrapper {
-    max-width: 360px;
+    max-width: 420px;
     width: 100%;
     padding: 20px;
     text-align: center;
   }
 
-  /* INTRO */
-  .intro {
-    animation: fadeIn 1s ease;
+  h1 {
+    font-weight: normal;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
   }
 
-  .intro h1 {
-    color: #c9184a;
-    font-size: 26px;
-    margin-bottom: 10px;
-  }
-
-  .intro p {
-    color: #555;
-    font-size: 15px;
-    margin-bottom: 20px;
-  }
-
-  .intro button {
-    padding: 10px 24px;
-    border: none;
-    border-radius: 30px;
-    background: #c9184a;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-  }
-
-  /* GALLERY */
-  .gallery {
-    display: none;
+  /* ENVELOPES GRID */
+  .grid {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    animation: fadeIn 1s ease;
+    gap: 18px;
   }
 
-  .photo {
+  .envelope {
     position: relative;
-    border-radius: 18px;
-    overflow: hidden;
+    height: 120px;
+    background: #b11226;
+    border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    overflow: hidden;
+    transition: transform 0.3s;
   }
 
-  .photo img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    transition: transform 0.4s ease;
+  .envelope:hover {
+    transform: translateY(-4px);
   }
 
-  .photo:hover img {
-    transform: scale(1.1);
-  }
-
-  .caption {
+  /* flap */
+  .envelope::before {
+    content: "";
     position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.4);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    opacity: 0;
-    padding: 10px;
-    font-size: 14px;
-    transition: opacity 0.4s ease;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: #d62839;
+    clip-path: polygon(0 0, 50% 55%, 100% 0);
+    transition: transform 0.6s ease;
+    transform-origin: top;
   }
 
-  .photo:hover .caption {
-    opacity: 1;
+  .envelope.open::before {
+    transform: rotateX(180deg);
   }
 
-  /* FINAL */
-  .final {
+  /* label */
+  .label {
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    font-size: 12px;
+    opacity: 0.9;
+  }
+
+  /* LETTER VIEW */
+  .letter-view {
     display: none;
-    margin-top: 30px;
-    animation: fadeIn 1s ease;
+    animation: fadeIn 0.6s ease;
   }
 
-  .heart {
-    font-size: 48px;
-    animation: beat 1.2s infinite;
+  .letter-view img {
+    width: 90%;
+    border-radius: 6px;
+    margin-bottom: 15px;
   }
 
-  .final p {
-    margin-top: 12px;
-    font-size: 18px;
-    color: #c9184a;
-    font-weight: 600;
+  .letter-view p {
+    font-size: 15px;
+    line-height: 1.6;
+    opacity: 0.95;
+  }
+
+  .back {
+    margin-top: 20px;
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes beat {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
   }
 </style>
 </head>
@@ -131,57 +117,76 @@
 
 <div class="wrapper">
 
-  <!-- INTRO -->
-  <div id="intro" class="intro">
-    <h1>For Us 🤍</h1>
-    <p>Some moments… some memories… just ours.</p>
-    <button onclick="start()">Open</button>
-  </div>
+  <!-- HOME -->
+  <div id="home">
+    <h1>Letters For You</h1>
 
-  <!-- GALLERY -->
-  <div id="gallery" class="gallery">
-    <div class="photo" onclick="showFinal()">
-      <img src="img1.jpg">
-      <div class="caption">Every smile with you feels like home.</div>
-    </div>
+    <div class="grid">
+      <div class="envelope" onclick="openLetter(0, this)">
+        <div class="label">Open when you need a hug</div>
+      </div>
 
-    <div class="photo" onclick="showFinal()">
-      <img src="img2.jpg">
-      <div class="caption">My favourite place is next to you.</div>
-    </div>
+      <div class="envelope" onclick="openLetter(1, this)">
+        <div class="label">Open when you miss me</div>
+      </div>
 
-    <div class="photo" onclick="showFinal()">
-      <img src="img3.jpg">
-      <div class="caption">Us, in every lifetime.</div>
-    </div>
+      <div class="envelope" onclick="openLetter(2, this)">
+        <div class="label">Open when you’re tired</div>
+      </div>
 
-    <div class="photo" onclick="showFinal()">
-      <img src="img4.jpg">
-      <div class="caption">You make ordinary moments beautiful.</div>
-    </div>
-
-    <div class="photo" onclick="showFinal()">
-      <img src="img5.jpg">
-      <div class="caption">Still choosing you, every day.</div>
+      <div class="envelope" onclick="openLetter(3, this)">
+        <div class="label">Open when you smile</div>
+      </div>
     </div>
   </div>
 
-  <!-- FINAL -->
-  <div id="final" class="final">
-    <div class="heart">🤍</div>
-    <p>I love you.</p>
+  <!-- LETTER -->
+  <div id="letter" class="letter-view">
+    <img id="letterImg" src="">
+    <p id="letterText"></p>
+    <button class="back" onclick="goBack()">Back</button>
   </div>
 
 </div>
 
 <script>
-  function start() {
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("gallery").style.display = "grid";
+  const letters = [
+    {
+      img: "img1.jpg",
+      text: "I wish I could wrap you in my arms right now. Until then, let this remind you that you’re never alone."
+    },
+    {
+      img: "img2.jpg",
+      text: "Missing me just means we’ve created something beautiful. I’m always closer than you think."
+    },
+    {
+      img: "img3.jpg",
+      text: "Rest for a moment. You’re doing better than you realise, and I’m so proud of you."
+    },
+    {
+      img: "img4.jpg",
+      text: "That smile of yours? It’s my favourite thing in the world."
+    }
+  ];
+
+  function openLetter(i, el) {
+    el.classList.add("open");
+
+    setTimeout(() => {
+      document.getElementById("home").style.display = "none";
+      document.getElementById("letter").style.display = "block";
+      document.getElementById("letterImg").src = letters[i].img;
+      document.getElementById("letterText").innerText = letters[i].text;
+    }, 600);
   }
 
-  function showFinal() {
-    document.getElementById("final").style.display = "block";
+  function goBack() {
+    document.getElementById("letter").style.display = "none";
+    document.getElementById("home").style.display = "block";
+
+    document.querySelectorAll(".envelope").forEach(e => {
+      e.classList.remove("open");
+    });
   }
 </script>
 
