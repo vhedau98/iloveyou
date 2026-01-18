@@ -17,28 +17,9 @@ body {
   justify-content: center;
   align-items: center;
   color: #fff;
-
-  /* BACKGROUND STICKER PATTERN */
   background-color: #0e0e0e;
-  background-image:
-    url("heart3.jpg"),
-    url("flower1.jpg"),
-    url("mine.jpg"),
-    url("heart2.jpg"),
-    url("flower2.jpg"),
-    url("snoopy.jpg");
-  background-size: 160px, 180px, 140px, 150px, 170px, 160px;
-  background-position:
-    5% 10%,
-    95% 15%,
-    10% 85%,
-    90% 80%,
-    50% 5%,
-    50% 95%;
-  background-repeat: no-repeat;
 }
 
-/* dark overlay so background doesn’t distract */
 body::before {
   content: "";
   position: fixed;
@@ -47,7 +28,6 @@ body::before {
   z-index: 0;
 }
 
-/* grain texture */
 body::after {
   content: "";
   position: fixed;
@@ -91,7 +71,7 @@ h1 {
 }
 
 .envelope:hover {
-  transform: translateY(-8px) rotate(-1deg);
+  transform: translateY(-6px) scale(1.02);
 }
 
 .envelope::before {
@@ -102,12 +82,6 @@ h1 {
   height: 60%;
   background: linear-gradient(135deg, #ff9ab3, #ff4d6d);
   clip-path: polygon(0 0, 50% 60%, 100% 0);
-  transform-origin: top;
-  transition: transform 0.6s ease;
-}
-
-.envelope.open::before {
-  transform: rotateX(180deg);
 }
 
 .seal {
@@ -122,7 +96,6 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
 }
 
 .label {
@@ -136,37 +109,17 @@ h1 {
 /* ================= LETTER VIEW ================= */
 .letter-view {
   display: none;
+  animation: reveal 0.8s ease forwards;
 }
 
-/* PAGE TURN */
-.page {
-  transform-origin: left center;
-  animation: pageIn 0.9s ease forwards;
-}
-
-@keyframes pageIn {
+@keyframes reveal {
   from {
-    transform: perspective(1400px) rotateY(-90deg);
     opacity: 0;
+    transform: translateY(30px) scale(0.96);
   }
   to {
-    transform: perspective(1400px) rotateY(0deg);
     opacity: 1;
-  }
-}
-
-.page-out {
-  animation: pageOut 0.6s ease forwards;
-}
-
-@keyframes pageOut {
-  from {
-    transform: perspective(1400px) rotateY(0deg);
-    opacity: 1;
-  }
-  to {
-    transform: perspective(1400px) rotateY(90deg);
-    opacity: 0;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -174,17 +127,19 @@ h1 {
 .letter-full {
   min-height: 80vh;
   background: linear-gradient(135deg, #b11226, #d62839);
-  border-radius: 28px;
+  border-radius: 30px;
   padding: 30px;
   position: relative;
+  overflow: visible; /* IMPORTANT */
 }
 
 .paper {
   background: #fdf6ee;
   color: #333;
   border-radius: 22px;
-  padding: 32px;
+  padding: 34px;
   position: relative;
+  z-index: 2;
 }
 
 .hero {
@@ -209,17 +164,17 @@ h1 {
 /* ================= STICKERS ================= */
 .sticker {
   position: absolute;
-  width: 120px;
+  width: 140px;
+  z-index: 5;
   pointer-events: none;
+  filter: drop-shadow(0 8px 10px rgba(0,0,0,0.25));
 }
 
-.small { width: 90px; }
-.big { width: 150px; }
-
+.small { width: 100px; }
 .rotate-left { transform: rotate(-15deg); }
-.rotate-right { transform: rotate(15deg); }
+.rotate-right { transform: rotate(12deg); }
 
-/* ================= BACK BUTTON ================= */
+/* ================= BACK ================= */
 .back {
   margin-top: 22px;
   padding: 10px 30px;
@@ -236,36 +191,33 @@ h1 {
 
 <div class="wrapper">
 
-  <!-- HOME -->
-  <div id="home">
-    <h1>Letters For You</h1>
+<!-- HOME -->
+<div id="home">
+  <h1>Letters For You</h1>
 
-    <div class="grid">
-      <div class="envelope" onclick="openLetter(0, this)">
-        <div class="seal">💗</div>
-        <div class="label">When you need a hug</div>
-      </div>
-
-      <div class="envelope" onclick="openLetter(1, this)">
-        <div class="seal">🌸</div>
-        <div class="label">When you miss me</div>
-      </div>
-
-      <div class="envelope" onclick="openLetter(2, this)">
-        <div class="seal">💌</div>
-        <div class="label">When you’re tired</div>
-      </div>
-
-      <div class="envelope" onclick="openLetter(3, this)">
-        <div class="seal">🤍</div>
-        <div class="label">Just because</div>
-      </div>
+  <div class="grid">
+    <div class="envelope" onclick="openLetter(0)">
+      <div class="seal">💗</div>
+      <div class="label">When you need a hug</div>
+    </div>
+    <div class="envelope" onclick="openLetter(1)">
+      <div class="seal">🌸</div>
+      <div class="label">When you miss me</div>
+    </div>
+    <div class="envelope" onclick="openLetter(2)">
+      <div class="seal">💌</div>
+      <div class="label">When you’re tired</div>
+    </div>
+    <div class="envelope" onclick="openLetter(3)">
+      <div class="seal">🤍</div>
+      <div class="label">Just because</div>
     </div>
   </div>
+</div>
 
-  <!-- LETTER -->
-  <div id="letter" class="letter-view"></div>
-  <button id="backBtn" class="back" onclick="goBack()" style="display:none">Back</button>
+<!-- LETTER -->
+<div id="letter" class="letter-view"></div>
+<button id="backBtn" class="back" onclick="goBack()" style="display:none">Back</button>
 
 </div>
 
@@ -274,19 +226,17 @@ const letters = [
 
 /* LETTER 1 */
 `
-<div class="page">
-  <div class="letter-full">
-    <img src="heart3.jpg" class="sticker big rotate-left" style="top:-30px; left:-30px;">
-    <img src="flower1.jpg" class="sticker small rotate-right" style="bottom:-20px; right:-10px;">
+<div class="letter-full">
+  <img src="heart3.jpg" class="sticker rotate-left" style="top:-40px; left:-40px;">
+  <img src="flower1.jpg" class="sticker small rotate-right" style="bottom:-30px; right:-10px;">
 
-    <div class="paper">
-      <img src="img1.jpg" class="hero">
-      <div class="title">For when you need a hug</div>
-      <div class="text">
-        When everything feels heavy, I want you to remember this —
-        you don’t have to carry it alone.
-        If I were there, I’d pull you close and let the world be quiet for a while.
-      </div>
+  <div class="paper">
+    <img src="img1.jpg" class="hero">
+    <div class="title">For when you need a hug</div>
+    <div class="text">
+      When everything feels heavy, I want you to remember this —
+      you don’t have to carry it alone.
+      If I were there, I’d pull you close and let the world be quiet for a while.
     </div>
   </div>
 </div>
@@ -294,86 +244,35 @@ const letters = [
 
 /* LETTER 2 */
 `
-<div class="page">
-  <div class="letter-full">
-    <img src="mine.jpg" class="sticker small rotate-left" style="top:-25px; right:40px;">
-    <img src="flower2.jpg" class="sticker rotate-right" style="bottom:-30px; left:-20px;">
+<div class="letter-full">
+  <img src="mine.jpg" class="sticker small rotate-left" style="top:-30px; right:40px;">
+  <img src="flower2.jpg" class="sticker rotate-right" style="bottom:-40px; left:-30px;">
 
-    <div class="paper">
-      <img src="img2.jpg" class="hero">
-      <div class="title">For when you miss me</div>
-      <div class="text">
-        Missing someone only happens when something real exists.
-        Even when we’re apart, we carry each other in memories,
-        songs, and quiet smiles.
-      </div>
-    </div>
-  </div>
-</div>
-`,
-
-/* LETTER 3 */
-`
-<div class="page">
-  <div class="letter-full">
-    <img src="heart2.jpg" class="sticker small rotate-left" style="top:-20px; left:-20px;">
-    <img src="heart.jpg" class="sticker rotate-right" style="bottom:-30px; right:30px;">
-
-    <div class="paper">
-      <img src="img3.jpg" class="hero">
-      <div class="title">For when you’re tired</div>
-      <div class="text">
-        Pause for a second. Breathe.
-        You’ve been doing more than you realise.
-        It’s okay to rest — I see you, and I’m proud of you.
-      </div>
-    </div>
-  </div>
-</div>
-`,
-
-/* LETTER 4 */
-`
-<div class="page">
-  <div class="letter-full">
-    <img src="happy.jpg" class="sticker big rotate-left" style="top:-30px; left:-30px;">
-    <img src="snoopy.jpg" class="sticker small rotate-right" style="bottom:-20px; right:20px;">
-
-    <div class="paper">
-      <img src="img4.jpg" class="hero">
-      <div class="title">Just because</div>
-      <div class="text">
-        I love you — in the ordinary moments,
-        in the chaos, in the calm,
-        and in every version of us.
-        Always.
-      </div>
+  <div class="paper">
+    <img src="img2.jpg" class="hero">
+    <div class="title">Just because</div>
+    <div class="text">
+      I love you — in the ordinary moments,
+      in the chaos, in the calm,
+      and in every version of us.
+      Always.
     </div>
   </div>
 </div>
 `
 ];
 
-function openLetter(i, el) {
-  el.classList.add("open");
-  setTimeout(() => {
-    document.getElementById("home").style.display = "none";
-    document.getElementById("letter").innerHTML = letters[i];
-    document.getElementById("letter").style.display = "block";
-    document.getElementById("backBtn").style.display = "inline-block";
-  }, 600);
+function openLetter(i) {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("letter").innerHTML = letters[i];
+  document.getElementById("letter").style.display = "block";
+  document.getElementById("backBtn").style.display = "inline-block";
 }
 
 function goBack() {
-  const page = document.querySelector(".page");
-  page.classList.add("page-out");
-
-  setTimeout(() => {
-    document.getElementById("letter").style.display = "none";
-    document.getElementById("home").style.display = "block";
-    document.getElementById("backBtn").style.display = "none";
-    document.querySelectorAll(".envelope").forEach(e => e.classList.remove("open"));
-  }, 600);
+  document.getElementById("letter").style.display = "none";
+  document.getElementById("home").style.display = "block";
+  document.getElementById("backBtn").style.display = "none";
 }
 </script>
 
