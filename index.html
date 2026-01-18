@@ -15,29 +15,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #0e0e0e;
   color: #fff;
-
-  /* STICKER PATTERN BACKGROUND */
-  background-color: #0e0e0e;
-  background-image:
-    url("heart3.jpg"),
-    url("flower1.jpg"),
-    url("heart2.jpg"),
-    url("mine.jpg"),
-    url("flower2.jpg"),
-    url("snoopy.jpg"),
-    url("heart.jpg"),
-    url("happy.jpg");
-  background-size:
-    90px, 80px, 70px, 75px,
-    85px, 90px, 70px, 80px;
-  background-repeat: repeat;
-  background-position:
-    0 0, 120px 80px, 240px 160px, 360px 40px,
-    80px 260px, 200px 320px, 340px 200px, 420px 360px;
 }
 
-/* dark overlay to soften stickers */
+/* DARK OVERLAY */
 body::before {
   content: "";
   position: fixed;
@@ -46,7 +28,7 @@ body::before {
   z-index: 0;
 }
 
-/* subtle grain */
+/* GRAIN */
 body::after {
   content: "";
   position: fixed;
@@ -56,6 +38,22 @@ body::after {
   z-index: 1;
 }
 
+/* BACKGROUND STICKERS */
+.bg-stickers {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.06;
+}
+
+.bg-stickers img {
+  position: absolute;
+  width: 140px;
+  filter: blur(0.4px);
+}
+
+/* ================= LAYOUT ================= */
 .wrapper {
   max-width: 520px;
   width: 100%;
@@ -86,7 +84,7 @@ h1 {
   cursor: pointer;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  transition: transform 0.35s ease;
+  transition: transform 0.3s ease;
 }
 
 .envelope:hover {
@@ -208,6 +206,16 @@ h1 {
 
 <body>
 
+<!-- BACKGROUND STICKERS -->
+<div class="bg-stickers">
+  <img src="heart3.jpg" style="top:6%; left:8%;">
+  <img src="flower1.jpg" style="top:14%; right:10%;">
+  <img src="snoopy.jpg" style="bottom:12%; left:6%;">
+  <img src="mine.jpg" style="bottom:18%; right:12%;">
+  <img src="heart2.jpg" style="top:48%; left:2%;">
+  <img src="happy.jpg" style="top:56%; right:4%;">
+</div>
+
 <div class="wrapper">
 
 <!-- HOME -->
@@ -243,7 +251,6 @@ h1 {
 <script>
 const letters = [
 
-/* LETTER 1 */
 `
 <div class="letter-full">
   <img src="heart3.jpg" class="sticker rotate-left" style="top:-40px; left:-40px;">
@@ -261,7 +268,6 @@ const letters = [
 </div>
 `,
 
-/* LETTER 2 */
 `
 <div class="letter-full">
   <img src="mine.jpg" class="sticker small rotate-left" style="top:-30px; right:40px;">
@@ -279,7 +285,6 @@ const letters = [
 </div>
 `,
 
-/* LETTER 3 */
 `
 <div class="letter-full">
   <img src="heart2.jpg" class="sticker small rotate-left" style="top:-25px; left:-25px;">
@@ -297,7 +302,6 @@ const letters = [
 </div>
 `,
 
-/* LETTER 4 */
 `
 <div class="letter-full">
   <img src="happy.jpg" class="sticker rotate-left" style="top:-35px; left:-35px;">
